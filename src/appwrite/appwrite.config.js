@@ -23,3 +23,20 @@ async function uniqueUsername (username){
     
   }
 }
+
+async function uniqueEmail (email){
+  try {
+    const response = await database.listDocuments("emails", 
+      [Query.equal("email", email)]
+    )
+    if (response.documents.length > 0){
+      return false
+    }else {
+      return true
+    }
+    
+  } catch (error) {
+    console.log("error while checking email uniquenss: ", error);
+    
+  }
+}
